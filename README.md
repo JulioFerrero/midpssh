@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="MidpSSH Logo" src="https://github.com/JulioFerrero/midpssh/blob/seb/res/large_scaled_6x.png?raw=true" />
+  <img alt="MidpSSH Logo" src="https://github.com/JulioFerrero/midpssh/blob/main/res/large_scaled_6x.png?raw=true" />
 
   # MidpSSH
 
@@ -27,3 +27,11 @@ Telnet/SSH Applet (javassh.org) to the MIDP platform.
 Floyd SSH and Telnet Floyd (and hence MidpSSH) includes
 sources from Matthias L. Jugel, Marcus Meißner (javassh.org)
 and also the GNU Classpath project.
+
+
+## Example
+
+<div align="center">
+  <img alt="Nokia Asha 210" src="https://github.com/JulioFerrero/midpssh/blob/main/res/210.jpeg?raw=true" />
+    <p>Using MidpSSH in a Nokia Asha 210 connecting by Telnet to sdf.org</p>
+</div>
