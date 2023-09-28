@@ -149,7 +149,7 @@ public abstract class Session implements Activatable {
 	protected void receiveData( byte[] buffer, int offset, int length ) throws IOException {
 		if ( buffer != null && length > 0 ) {
 			try {
-				emulation.putString( new String( buffer, offset, length, "UTF-8" ) );
+				emulation.putString( new String( buffer, offset, length ) );
 			}
 			catch ( Exception e ) {
 
@@ -194,7 +194,6 @@ public abstract class Session implements Activatable {
 	
 	private boolean connect() throws IOException {
         String host = spec.host;
-        int reconnect_count = spec.reconnect_count;
         
 		emulation.putString( "Connecting to " + host + "..." );
 		
@@ -210,18 +209,7 @@ public abstract class Session implements Activatable {
     		//#ifdef blackberry
     		customiseConnectionString(conn);
     		//#endif
-			connection = null;
-			do {
-				try {
-					connection = (StreamConnection) Connector.open( conn.toString(), Connector.READ_WRITE, false );
-				}
-				catch ( IOException e ) {
-					if ( reconnect_count <= 0 )
-						throw e;
-					emulation.putString( String.valueOf(reconnect_count) + "." );
-					reconnect_count--;
-				}
-			} while ( connection == null );
+			connection = (StreamConnection) Connector.open( conn.toString(), Connector.READ_WRITE, false );
 			in = connection.openDataInputStream();
 			out = connection.openDataOutputStream();
         }

@@ -36,9 +36,7 @@ public class SessionSpec {
 	public static final String TYPE_TELNET = "telnet";
 	
 	public String alias, type, host, username, password;
-
-	public int reconnect_count;
-
+	
 	public boolean usepublickey;
     
 //#ifdef blackberryconntypes
@@ -60,7 +58,6 @@ public class SessionSpec {
         blackberryConnType = in.readInt();
 //#endif
     	usepublickey = in.readBoolean();
-        reconnect_count = in.readInt();
 	}
 
 	public void write( DataOutputStream out ) throws IOException {
@@ -73,6 +70,5 @@ public class SessionSpec {
         out.writeInt(blackberryConnType);
 //#endif
         out.writeBoolean(usepublickey);
-        out.writeInt(reconnect_count);
 	}
 }

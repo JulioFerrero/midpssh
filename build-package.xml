@@ -3,7 +3,7 @@
 <project name="MidpSSH-package" basedir="." default="all">
 
 	<property file="build.properties" />
-	
+
 	<target name="all" depends="init,build-uptodate">
 		<antcall target="build" />
 		<antcall target="build-run" />
@@ -13,7 +13,7 @@
 		<antcall target="build2" />
 	</target>
 
-	<target name="build2" depends="package,obfuscate,preverify,checksum">
+	<target name="build2" depends="package,obfuscate,checksum">
 
 	</target>
 
@@ -112,7 +112,7 @@
 		<property name="preprocess.symbols.extra" value="NONE" />
 		<property name="all.preprocess.symbols" value="${preprocess.symbols},${preprocess.symbols.global},${preprocess.symbols.midp},${preprocess.symbols.extra}" />
 		<echo message="Preprocess symbols: ${all.preprocess.symbols}" />
-		
+
 		<wtkpreprocess srcdir="${build.dir}/src" destdir="${build.dir}/src-proc/${filename}" symbols="${preprocess.symbols},${preprocess.symbols.global},${preprocess.symbols.midp},${preprocess.symbols.extra}" verbose="false" />
 		<touch file="${build.dir}/src-proc/done-${filename}" />
 	</target>
@@ -122,13 +122,11 @@
 
 		<!-- Compile everything, but don't preverify (yet). -->
 
-		<!--
         <wtkbuild srcdir="${build.dir}/src-proc/${filename}"
                   destdir="${build.dir}/bin/${filename}"
         		  debug="false"
         	      optimize="true"
                   preverify="false" target="1.4" />
--->
 
 		<javac srcdir="${build.dir}/src-proc/${filename}" destdir="${build.dir}/bin/${filename}" debug="false" optimize="true" target="1.1" source="1.2" bootclasspathref="${wtk.classpath}" />
 
@@ -195,6 +193,7 @@
 			<argument value="-keep class ssh.v1.MD5" />
 			<argument value="-keep class ssh.v1.NONE" />
 			<argument value="-defaultpackage" />
+			<argument value="-microedition" />
 			<!--<argument value="-dontobfuscate" />-->
 		</wtkobfuscate>
 	</target>
@@ -232,11 +231,6 @@
 			<argument value="-overloadaggressively" />
 			<!--<argument value="-dontobfuscate" />-->
 		</wtkobfuscate>
-	</target>
-
-	<target name="preverify">
-		<!-- Preverify. -->
-		<wtkpreverify jarfile="${dist.dir}/${jar.file}" jadfile="${dist.dir}/${jad.file}" />
 	</target>
 
 	<target name="checksum">

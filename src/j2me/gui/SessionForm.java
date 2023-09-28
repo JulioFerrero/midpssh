@@ -44,7 +44,7 @@ public class SessionForm extends EditableForm {
 
 	private boolean edit;
 	
-	private TextField tfAlias, tfHost, tfReconnectCount, tfUsername, tfPassword;
+	private TextField tfAlias, tfHost, tfUsername, tfPassword;
     
 //#ifdef blackberryconntypes
     private ChoiceGroup cgBlackberryConnType;
@@ -76,7 +76,6 @@ public class SessionForm extends EditableForm {
 
 		tfAlias = new TextField( "Alias:", null, 255, TextField.ANY );
 		tfHost = new TextField( "Host:", null, 255, TextField.ANY );
-		tfReconnectCount = new TextField( "Reconnect count:", null, 2, TextField.NUMERIC );
 //#ifdef midp2
         tfHost.setConstraints(TextField.ANY | TextField.URL);
 //#endif
@@ -100,7 +99,6 @@ public class SessionForm extends EditableForm {
 
 		append( tfAlias );
 		append( tfHost );
-		append( tfReconnectCount );
 //#ifndef notelnet
 		append( cgType );
 		//#ifndef noinstructions
@@ -163,7 +161,6 @@ public class SessionForm extends EditableForm {
 	    if ( !edit ) {
 			tfAlias.setString( "" );
 			tfHost.setString( "" );
-			tfReconnectCount.setString( "" );
 			tfUsername.setString( "" );
 			tfPassword.setString( "" );
 	    }
@@ -177,7 +174,6 @@ public class SessionForm extends EditableForm {
 		if ( conn != null ) {
 			tfAlias.setString( conn.alias );
 			tfHost.setString( conn.host );
-			tfReconnectCount.setString( String.valueOf(conn.reconnect_count) );
 			//#ifndef notelnet
 			if ( conn.type != null ) {
 				for ( int i = 0; i < typeCodes.length; i++ ) {
@@ -226,12 +222,6 @@ public class SessionForm extends EditableForm {
 				conn.type = SessionSpec.TYPE_SSH;
 				//#endif
 				conn.host = tfHost.getString();
-				try {
-					conn.reconnect_count = Integer.parseInt( tfReconnectCount.getString() );
-				}
-				catch ( NumberFormatException e ) {
-					conn.reconnect_count = 0;
-				}
 				conn.username = tfUsername.getString();
 				conn.password = tfPassword.getString();
 				//#ifdef ssh2

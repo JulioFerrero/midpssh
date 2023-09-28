@@ -33,7 +33,6 @@
 package ssh.v2;
 
 import java.util.Random;
-import java.io.UnsupportedEncodingException;
 
 public class DHKeyExchange {
 
@@ -143,7 +142,7 @@ public class DHKeyExchange {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean next(byte[] K_S, byte[] f, byte[] sig_of_h) throws UnsupportedEncodingException {
+	public boolean next(byte[] K_S, byte[] f, byte[] sig_of_h) {
 		// K_S is server_key_blob, which includes ....
 		// string ssh-dss
 		// impint p of dsa

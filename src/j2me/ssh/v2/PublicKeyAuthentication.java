@@ -1,7 +1,5 @@
 package ssh.v2;
 
-import java.io.UnsupportedEncodingException;
-
 import java.util.Random;
 
 import app.Settings;
@@ -25,7 +23,7 @@ public class PublicKeyAuthentication {
 	}
 	//#endif
 
-	public byte[] sign(byte[] session_id, byte[] message) throws UnsupportedEncodingException {
+	public byte[] sign(byte[] session_id, byte[] message) {
 		SshPacket2 buf = new SshPacket2();
 		buf.putString(session_id);
 		buf.putByte((byte) 50); // SSH2_MSG_USERAUTH_REQUEST
@@ -85,13 +83,13 @@ public class PublicKeyAuthentication {
 		return res;
 	}
 
-	public String getPublicKeyText() throws UnsupportedEncodingException {
+	public String getPublicKeyText() {
 		byte[] pubblob = getPublicKeyBlob();
 		byte[] pub = toBase64(pubblob, 0, pubblob.length);
 		return DHKeyExchange.SSH_DSS + " " + new String(pub);
 	}
 
-	public byte[] getPublicKeyBlob() throws UnsupportedEncodingException {
+	public byte[] getPublicKeyBlob() {
 		SshPacket2 buf = new SshPacket2();
 		buf.putString(DHKeyExchange.SSH_DSS);
 		buf.putMpInt(p.toByteArray());

@@ -23,14 +23,10 @@ package gui.session;
 import gui.Activatable;
 import gui.MainMenu;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.List;
-import javax.microedition.lcdui.Alert;
-import javax.microedition.lcdui.AlertType;
 
 import ssh.v2.PublicKeyAuthentication;
 import terminal.VT320;
@@ -139,16 +135,7 @@ public class SpecialMenu extends List implements CommandListener, Activatable {
 		        	//#ifdef ssh2
 		        	if (Settings.x != null) {
 		        		PublicKeyAuthentication pk = new PublicKeyAuthentication();
-						try {
-							option = pk.getPublicKeyText();
-						}
-						catch (UnsupportedEncodingException ex) {
-							Alert alert = new Alert( "PubKey Error" );
-							alert.setType( AlertType.ERROR );
-							alert.setTimeout(Alert.FOREVER);
-							alert.setString( "mk pkey packet: " + ex.toString() );
-							MainMenu.setDisplay( alert );
-						}
+		        		option = pk.getPublicKeyText();
 		        	}
 		        	else {
 		        		option = "";

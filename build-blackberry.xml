@@ -88,39 +88,6 @@
 			</filterset>
 		</copy>
 	</target>
-	
-	<target name="ota" if="bb.ota">
-		<mkdir dir="${build.dir}/blackberry/ota" />
-		
-		<!-- Unzip main COD file and rename constituents -->
-		<unzip src="${dist.dir}/${cod.file}" dest="${build.dir}/blackberry/ota" />
-		<copy file="${build.dir}/blackberry/ota/${bb.codename}.cod" tofile="${dist.dir}/${bb.codename}-1.cod" />
-		<copy file="${build.dir}/blackberry/ota/${bb.codename}-1.cod" tofile="${dist.dir}/${bb.codename}-2.cod" />
-		
-		<java classname="FileLength" classpath="${build.dir}/tasks" outputproperty="cod.size.1">
-			<arg value="${dist.dir}/${bb.codename}-1.cod" />
-		</java>
-		
-		<java classname="FileLength" classpath="${build.dir}/tasks" outputproperty="cod.size.2">
-			<arg value="${dist.dir}/${bb.codename}-2.cod" />
-		</java>
-		
-		<!--
-		<length property="cod.size.1" file="${build.dir}/blackberry/ota/${bb.codename}.cod" />
-		<length property="cod.size.2" file="${build.dir}/blackberry/ota/${bb.codename}-1.cod" />
-		-->
-		
-		<java classname="RewriteBlackberryJAD" classpath="${build.dir}/tasks">
-			<arg value="${dist.dir}/${jad.file}" />
-			<arg value="${dist.dir}/${ota.jad.file}" />
-			<arg value="${dist.dir}/${bb.codename}-1.cod" />
-			<arg value="${dist.dir}/${bb.codename}-2.cod" />
-			<arg value="${bb.codename}-1.cod" />
-			<arg value="${bb.codename}-2.cod" />
-			<arg value="${cod.size.1}" />
-			<arg value="${cod.size.2}" />
-		</java>
-	</target>
 
 	<target name="simple-ota" unless="bb.ota">
 		<copy file="${dist.dir}/${jad.file}" tofile="${dist.dir}/${ota.jad.file}" />

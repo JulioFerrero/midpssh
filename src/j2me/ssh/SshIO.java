@@ -292,7 +292,7 @@ public class SshIO {
 
 	public void sendData(byte[] data, int offset, int length)
 			throws IOException {
-		String str = new String(data, offset, length, "UTF-8");
+		String str = new String(data, offset, length);
 		// if (debug > 1) System.out.println("SshIO.send(" + str + ")");
 		if (dataToSend == null)
 			dataToSend = str;
@@ -447,7 +447,7 @@ public class SshIO {
 				//#endif
 			}
 		}
-		return result.getBytes("UTF-8");
+		return result.getBytes();
 	}
 
 	/**
