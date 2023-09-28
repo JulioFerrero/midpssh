@@ -32,6 +32,6 @@ and also the GNU Classpath project.
 ## Example
 
 <div align="center">
-  <img alt="Nokia Asha 210" src="https://github.com/JulioFerrero/midpssh/blob/main/res/210.jpeg?raw=true" />
+  <img alt="Nokia Asha 210" src="https://github.com/JulioFerrero/midpssh/blob/main/res/210.jpeg?raw=true" width="300"/>
     <p>Using MidpSSH in a Nokia Asha 210 connecting by Telnet to sdf.org</p>
 </div>
